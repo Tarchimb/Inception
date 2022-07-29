@@ -1,0 +1,61 @@
+version: '3.9'
+
+networks:
+  Inception:
+    name: Inception
+    driver: bridge
+
+services:
+
+  mariadb:
+    image: mariadb
+    container_name: maria-db
+    build:
+      context: ./requirements/mariadb
+    volumes:
+      - /Users/tarchimb/42/Inception/srcs/mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: always
+    env_file: .env
+    networks:
+      - Inception
+
+
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - /Users/tarchimb/42/Inception/srcs/wordpress:/var/www/wordpress
+    ports:
+      - 9000:9000
+    build:
+      context: ./requirements/wordpress
+      dockerfile: Dockerfile
+    restart: always
+    env_file: .env
+    networks:
+      - Inception
+
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    volumes:
+      - /Users/tarchimb/42/Inception/srcs/wordpress:/var/www/wordpress
+      - /Users/tarchimb/42/Inception/srcs/nginx:/certs
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
+    restart: always
+    networks:
+      Inception:
+    extra_hosts:
+      - "tarchimb.42.fr:127.0.0.1"
+    build: 
+      context: ./requirements/nginx
+      dockerfile: Dockerfile
+  

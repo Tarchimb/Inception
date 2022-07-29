@@ -1,0 +1,4 @@
+docker build:
+	.	: use current directory as build context
+	-f	: path to the dockerfile
+	-t	: assign a name to the image to create, can use and at which to save the new image
