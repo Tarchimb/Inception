@@ -6,27 +6,26 @@
 #    By: tarchimb <tarchimb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 12:02:48 by tarchimb          #+#    #+#              #
-#    Updated: 2022/08/09 15:49:27 by tarchimb         ###   ########.fr        #
+#    Updated: 2022/07/29 16:25:12 by tarchimb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DCR			=	docker-compose -f srcs/docker-compose.yml
-mariadb		= 	/save/mariadb#/home/tarchimb/data/mariadb
-nginx		= 	/save/nginx#/home/tarchimb/data/nginx
-wordpress	= 	/save/wordpress#/home/tarchimb/data/wordpress
+mariadb		= 	/Users/tarchimb/42/Inception/srcs/mariadb
+nginx		= 	/Users/tarchimb/42/Inception/srcs/nginx
+wordpress	= 	/Users/tarchimb/42/Inception/srcs/wordpress
 container	=	$(shell docker ps -qa)
 volume		=	$(shell docker volume ls -q)
 images		=	$(shell docker images -qa)
 
 all:
-	mkdir -p /save
 	mkdir $(nginx) $(mariadb) $(wordpress) ||:
 	$(DCR) up -d --build
-# sleep 2
+	sleep 2
 #Add this command to make sure that the certificat will be accepted by the host. This command is for Macos
-# sudo security add-trusted-cert -d srcs/nginx/certificat.crt
-cp ${nginx}/certificat.crt /usr/local/share/ca-certificates/certificat.crt
-update-ca-certificates
+	sudo security add-trusted-cert -d srcs/nginx/certificat.crt
+#cp /home/tarchimb/data/nginx/certificat.crt /usr/local/share/ca-certificates/certificat.crt
+#update-ca-certificates
 
 debug: fclean
 	$(DCR) build --no-cache --progress plain
