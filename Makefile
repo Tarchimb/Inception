@@ -6,7 +6,7 @@
 #    By: tarchimb <tarchimb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 12:02:48 by tarchimb          #+#    #+#              #
-#    Updated: 2022/08/09 16:16:52 by tarchimb         ###   ########.fr        #
+#    Updated: 2022/08/09 16:41:53 by tarchimb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ images		=	$(shell docker images -qa)
 all:
 	mkdir $(nginx) $(mariadb) $(wordpress) ||:
 	$(DCR) up -d --build
-	sleep 2
+	sleep 1
 	cp ${nginx}/certificat.crt /usr/local/share/ca-certificates/certificat.crt
+	sleep 1
 	update-ca-certificates
 #Add this command to make sure that the certificat will be accepted by the host. This command is for Macos
 
