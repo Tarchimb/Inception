@@ -6,7 +6,7 @@
 #    By: tarchimb <tarchimb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 12:02:48 by tarchimb          #+#    #+#              #
-#    Updated: 2022/08/09 14:39:07 by tarchimb         ###   ########.fr        #
+#    Updated: 2022/08/09 15:26:47 by tarchimb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ volume		=	$(shell docker volume ls -q)
 images		=	$(shell docker images -qa)
 
 all:
-	mkdir -p $(nginx) $(mariadb) $(wordpress) ||:
+	mkdir -p /home/tarchimb/data
+	mkdir $(nginx) $(mariadb) $(wordpress) ||:
 	$(DCR) up -d --build
-	sleep 2
+# sleep 2
 #Add this command to make sure that the certificat will be accepted by the host. This command is for Macos
-	# sudo security add-trusted-cert -d srcs/nginx/certificat.crt
+# sudo security add-trusted-cert -d srcs/nginx/certificat.crt
 # cp /home/tarchimb/data/nginx/certificat.crt /usr/local/share/ca-certificates/certificat.crt
 # update-ca-certificates
 
