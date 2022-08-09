@@ -44,6 +44,7 @@ services:
     image: nginx
     container_name: nginx
     volumes:
+      - /Users/tarchimb/42/Inception/srcs/wordpress:/var/www/wordpress
       - /Users/tarchimb/42/Inception/srcs/nginx:/certs
     ports:
       - 443:443
