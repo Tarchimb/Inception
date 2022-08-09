@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.7'
 
 networks:
   Inception:
@@ -13,7 +13,7 @@ services:
     build:
       context: ./requirements/mariadb
     volumes:
-      - /home/tarchimb/data/mariadb:/var/lib/mysql
+      - /save/mariadb:/var/lib/mysql
     ports:
       - 3306:3306
     restart: always
@@ -28,7 +28,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - /home/tarchimb/data/wordpress:/var/www/wordpress
+      - /save/wordpress:/var/www/wordpress
     ports:
       - 9000:9000
     build:
@@ -44,8 +44,8 @@ services:
     image: nginx
     container_name: nginx
     volumes:
-      - /home/tarchimb/data/nginx:/var/www/wordpress
-      - /home/tarchimb/data/nginx:/certs
+      - /save/wordpress:/var/www/wordpress
+      - /save/nginx:/certs
     ports:
       - 443:443
     depends_on:
