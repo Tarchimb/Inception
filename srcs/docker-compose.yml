@@ -7,10 +7,17 @@ networks:
 
 volumes:
   mariadb-vol:
-
+    driver: local
+    driver_opts:
+      device: /home/tarchimb/data/mariadb
+      type: volume
+      o: bind
   wordpress-vol:
-
-  nginx-vol:
+    driver: local
+    driver_opts:
+      device: /home/tarchimb/data/wordpress
+      type: volume
+      o: bind
 
 services:
 
@@ -51,7 +58,7 @@ services:
     image: nginx
     container_name: nginx
     volumes:
-      - nginx-vol
+      - wordpress-vol
     ports:
       - 443:443
     depends_on:
