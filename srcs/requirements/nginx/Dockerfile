@@ -26,7 +26,7 @@ COPY conf/nginx.conf /etc/nginx/conf.d
 COPY ./entrypoint.sh ./
 
 
-RUN chmod +x ./entrypoint.sh
+RUN chmod 777 ./entrypoint.sh
 
 #Open ports
 EXPOSE 443
