@@ -7,13 +7,13 @@ networks:
 
 volumes:
   mariadb-vol:
-    driver: local
+    name: mariadb-volume
     driver_opts:
       device: /home/tarchimb/data/mariadb
       type: volume
       o: bind
   wordpress-vol:
-    driver: local
+    name: wordpress-volume
     driver_opts:
       device: /home/tarchimb/data/wordpress
       type: volume
