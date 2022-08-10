@@ -21,7 +21,7 @@ RUN mkdir -p /var/www/wordpress && chmod 755 /var/www/wordpress
 
 #Get the entrypoint for our container and make it executable
 COPY ./configure.sh ./configure.sh
-RUN chmod 777 ./configure.sh
+RUN chmod +x ./configure.sh
 
 #Expose port 9000
 EXPOSE 9000
