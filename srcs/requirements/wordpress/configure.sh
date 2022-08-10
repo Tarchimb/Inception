@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Check if the configuration script is here, if no, wordpress has already been installed
-if [ ! -d "/var/www/wordpress/wp-config.php" ]
+if [ ! -f "/var/www/wordpress/wp-config.php" ]
 then
 	sleep 10
 	#Download Wordpress
