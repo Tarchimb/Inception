@@ -6,7 +6,7 @@
 #    By: tarchimb <tarchimb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 12:02:48 by tarchimb          #+#    #+#              #
-#    Updated: 2022/08/10 13:17:36 by tarchimb         ###   ########.fr        #
+#    Updated: 2022/08/10 13:22:18 by tarchimb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ DCR			=	docker-compose -f srcs/docker-compose.yml
 mariadb		= 	/Users/tarchimb/42/Inception/srcs/mariadb
 nginx		= 	/Users/tarchimb/42/Inception/srcs/nginx
 wordpress	= 	/Users/tarchimb/42/Inception/srcs/wordpress
+src_cert	= 	/Users/tarchimb/42/Inception/srcs/nginx/certificat.crt
+dst_cert	=	/usr/local/share/ca-certificates/certificat.crt
 container	=	$(shell docker ps -qa)
 volume		=	$(shell docker volume ls -q)
 images		=	$(shell docker images -qa)
@@ -24,7 +26,7 @@ all:
 	sleep 2
 #Add this command to make sure that the certificat will be accepted by the host. This command is for Macos
 	-rm /usr/local/share/ca-certificates/certificat.crt ||:
-	cp /home/tarchimb/data/nginx/certificat.crt /usr/local/share/ca-certificates/certificat.crt
+	cp ${src_cert} ${dst_cert}
 	update-ca-certificates -f
 
 debug: fclean
