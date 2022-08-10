@@ -3,6 +3,7 @@
 #Check if the configuration script is here, if no, wordpress has already been installed
 if [ ! -d "/run/php" ]
 then
+	sleep 10
 	#Download Wordpress
 	wp core download --allow-root
 	#Create wp-config.php file
