@@ -5,6 +5,13 @@ networks:
     name: Inception
     driver: bridge
 
+volumes:
+  mariadb-vol:
+
+  wordpress-vol:
+
+  nginx-vol:
+
 services:
 
   mariadb:
@@ -13,7 +20,7 @@ services:
     build:
       context: ./requirements/mariadb
     volumes:
-      - /Users/tarchimb/42/Inception/srcs/mariadb:/var/lib/mysql
+      - mariadb-vol
     ports:
       - 3306:3306
     restart: always
@@ -28,7 +35,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - /Users/tarchimb/42/Inception/srcs/wordpress:/var/www/wordpress
+      - wordpress-vol
     ports:
       - 9000:9000
     build:
@@ -44,8 +51,7 @@ services:
     image: nginx
     container_name: nginx
     volumes:
-      - /Users/tarchimb/42/Inception/srcs/wordpress:/var/www/wordpress
-      - /Users/tarchimb/42/Inception/srcs/nginx:/certs
+      - nginx-vol
     ports:
       - 443:443
     depends_on:
