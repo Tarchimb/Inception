@@ -6,22 +6,19 @@
 #    By: tarchimb <tarchimb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 12:02:48 by tarchimb          #+#    #+#              #
-#    Updated: 2022/08/10 17:45:00 by tarchimb         ###   ########.fr        #
+#    Updated: 2022/08/11 10:11:40 by tarchimb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 DCR			=	docker-compose -f srcs/docker-compose.yml
-mariadb		= 	/Users/tarchimb/42/Inception/srcs/mariadb
-nginx		= 	/Users/tarchimb/42/Inception/srcs/nginx
-wordpress	= 	/Users/tarchimb/42/Inception/srcs/wordpress
-src_cert	= 	/Users/tarchimb/42/Inception/srcs/nginx/certificat.crt
-dst_cert	=	/usr/local/share/ca-certificates/certificat.crt
+mariadb		= 	/home/tarchimb/data/mariadb
+wordpress	= 	/home/tarchimb/data/wordpress
 container	=	$(shell docker ps -qa)
 volume		=	$(shell docker volume ls -q)
 images		=	$(shell docker images -qa)
 
 all:
-	mkdir $(nginx) $(mariadb) $(wordpress) ||:
+	mkdir -p $(mariadb) $(wordpress) ||:
 	$(DCR) up -d --build
 	sed -i "s/127.0.0.1	localhost/127.0.0.1	localhost tarchimb.42.fr#/g" /etc/hosts
 
@@ -37,7 +34,7 @@ clean: stop
 fclean: clean
 	-docker volume rm -f $(volume) 2>/dev/null ||:
 	-docker rmi -r $(image) 2>/dev/null ||:
-	-rm -rf $(nginx) $(mariadb) $(wordpress) 2>/dev/null ||:
+	-rm -rf  /home/tarchimb 2>/dev/null ||:
 	docker system prune -a --force
 
 pause:
