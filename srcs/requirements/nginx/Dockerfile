@@ -1,7 +1,7 @@
 FROM debian:buster
 
 #Install nginx and openssl (to get the SSL Certificate(HTTPS))
-RUN apt-get update && apt-get upgrade && apt-get -y install \
+RUN apt-get update; apt-get upgrade; apt-get -y install \
 	nginx \
 	openssl 
 
