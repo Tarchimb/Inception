@@ -6,7 +6,7 @@
 #    By: tarchimb <tarchimb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 12:02:48 by tarchimb          #+#    #+#              #
-#    Updated: 2022/08/11 10:38:58 by tarchimb         ###   ########.fr        #
+#    Updated: 2022/08/11 10:43:49 by tarchimb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ images		=	$(shell docker images -qa)
 all:
 	-mkdir -p $(mariadb) $(wordpress) ||:
 	$(DCR) up -d --build
-	if [ ! -z "`grep tarchimb /etc/hosts`" ]; then sed -i "s/127.0.0.1	localhost/127.0.0.1	localhost tarchimb.42.fr/g" /etc/hosts; fi
+	if [ -z "`grep tarchimb.42.fr /etc/hosts`" ]; then sed -i "s/127.0.0.1	localhost/127.0.0.1	localhost tarchimb.42.fr/g" /etc/hosts; fi
 
 debug: fclean
 	$(DCR) build --no-cache --progress plain

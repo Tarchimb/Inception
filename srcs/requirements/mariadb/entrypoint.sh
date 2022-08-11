@@ -21,6 +21,7 @@ then
 	mysql -e "FLUSH PRIVILEGES;"
 	#Make the root password take effect's
 	mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${MARIADB_ROOT_PWD}'"
+	#Change root password
 	sed -i "s/password =/password = ${MARIADB_ROOT_PWD} #/" /etc/mysql/debian.cnf
 	#stop mysql to be able to launch mysqld_safe
 	service mysql stop

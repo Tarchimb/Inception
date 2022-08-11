@@ -3,7 +3,6 @@
 #Check if the configuration script is here, if no, wordpress has already been installed
 if [ ! -f "/var/www/wordpress/wp-config.php" ]
 then
-	sleep 10
 	#Download Wordpress
 	wp core download --allow-root
 	#Create wp-config.php file
@@ -13,6 +12,7 @@ then
 	#Create a random user with subscriber role, and get him a new password
 	wp user create --allow-root ${WP_USER} ${WP_USER_EMAIL} --role=subscriber
 	wp user update 2 --allow-root --user_pass=${WP_USER_PWD}
+	#Download and install the new wordpress theme
 	wp theme install inspiro --activate --allow-root
 fi
 

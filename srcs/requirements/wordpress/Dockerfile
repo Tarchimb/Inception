@@ -1,9 +1,12 @@
 FROM debian:buster
 
 #Install requirements to make work php and wordpress
-RUN apt-get update; 						\
-	apt-get upgrade; 						\
-	apt-get install -y php-fpm php7.3 php-mysql curl 
+RUN apt-get update && apt-get upgrade; \
+	apt-get install -y \
+	php-fpm \
+	php7.3 \
+	php-mysql \
+	curl 
 
 #Install curl command
 RUN apt-get install -y curl

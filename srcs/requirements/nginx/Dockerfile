@@ -1,9 +1,9 @@
 FROM debian:buster
 
 #Install nginx and openssl (to get the SSL Certificate(HTTPS))
-RUN apt-get update; 					\
-	apt-get upgrade; 					\
-	apt-get -y install nginx openssl 
+RUN apt-get update && apt-get upgrade && apt-get -y install \
+	nginx \
+	openssl 
 
 #Create a folder to save the SSL Certificate
 RUN mkdir -p /etc/certs
@@ -23,8 +23,8 @@ RUN openssl req -newkey rsa:4096 		\
 #Copy the config file into the container
 COPY conf/nginx.conf /etc/nginx/conf.d
 
+#Copy the script that will be launched at start of the container, and made it executable 
 COPY ./entrypoint.sh ./
-
 
 RUN chmod +x ./entrypoint.sh
 
