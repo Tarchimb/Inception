@@ -6,7 +6,8 @@ RUN apt-get update && apt-get upgrade; \
 	php-fpm \
 	php7.3 \
 	php-mysql \
-	curl 
+	curl \
+	mariadb-client 
 
 #Install curl command
 RUN apt-get install -y curl

@@ -3,6 +3,11 @@
 #Check if the configuration script is here, if no, wordpress has already been installed
 if [ ! -f "/var/www/wordpress/wp-config.php" ]
 then
+	# while ! mysql -h mariadb -u root -p $MARIADB_ROOT_PWD -e "SELECT schema_name FROM information_schema.schemata WHERE schema_name='$MARIADB_DB'"; do
+  		# echo "Waiting for database to be created..."
+  		# sleep 5
+	# done
+	echo "Starting installation wordpress"
 	#Download Wordpress
 	wp core download --allow-root
 	#Create wp-config.php file
@@ -14,6 +19,9 @@ then
 	wp user update 2 --allow-root --user_pass=${WP_USER_PWD}
 	#Download and install the new wordpress theme
 	wp theme install inspiro --activate --allow-root
+	echo "Wordpress successfully installed"
+else
+	echo "No need to install wordpress"
 fi
 
 #Start and stop php-fpm to make sure /run/php directory has been created

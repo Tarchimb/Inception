@@ -1,22 +1,44 @@
 version: '3.5'
 
-  #Service plan:
+  #Volumes:     Use to save memory on the host machine or somewhere else
 
-  # image:          Name given to the image
-  # container_name: Name given to the container
-  # build:
-  #   context:      Where to find the Dockerfile to build the image
-  # volumes:        Volumes used for this container (Data saved somewhere outside of the container)
-  # ports:          Containers_port:Host_port
-  # restart:        Will restart automatically the container, depends on how it is configure
-  # env_file:       Pass the .env file to use it in the dockerfile and the container
-  # networks:       Bind different container together using the same network
-  # depends-on:     Will wait until the other container finished build
+  #name:        Given name to the volume
+  #driver_opts: 
+  # device:     Where to store the data on the host machine
+  # type:       Type of volume (can be volume, bind-mounts)
+  # o:          Options for the volume. Bind to store it on our host machine in the given path
+volumes:
+  mariadb-vol:
+    name: mariadb-volume
+    driver_opts:
+      device: /Users/tarchimb/42/Inception/data/mariadb
+      type: volume
+      o: bind
+
+  wordpress-vol:
+    name: wordpress-volume
+    driver_opts:
+      device: /Users/tarchimb/42/Inception/data/wordpress
+      type: volume
+      o: bind
+
+#Service plan:
+
+# image:          Name given to the image
+# container_name: Name given to the container
+# build:
+#   context:      Where to find the Dockerfile to build the image
+# volumes:        Volumes used for this container (Data saved somewhere outside of the container)
+# ports:          Containers_port:Host_port
+# restart:        Will restart automatically the container, depends on how it is configure
+# env_file:       Pass the .env file to use it in the dockerfile and the container
+# networks:       Bind different container together using the same network
+# depends-on:     Will wait until the other container finished build
 
 services:
   mariadb:
     image: mariadb
-    container_name: maria-db
+    container_name: mariadb
     build:
       context: ./requirements/mariadb
     volumes:
@@ -70,25 +92,3 @@ networks:
     name: Inception
     driver: bridge
 
-  #Volumes:     Use to save memory on the host machine or somewhere else
-
-  #name:        Given name to the volume
-  #driver_opts: 
-  # device:     Where to store the data on the host machine
-  # type:       Type of volume (can be volume, bind-mounts)
-  # o:          Options for the volume. Bind to store it on our host machine in the given path
-
-volumes:
-  mariadb-vol:
-    name: mariadb-volume
-    driver_opts:
-      device: /home/tarchimb/data/mariadb
-      type: volume
-      o: bind
-
-  wordpress-vol:
-    name: wordpress-volume
-    driver_opts:
-      device: /home/tarchimb/data/wordpress
-      type: volume
-      o: bind
