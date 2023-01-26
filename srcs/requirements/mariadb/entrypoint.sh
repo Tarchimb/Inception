@@ -2,9 +2,6 @@
 #Check if database is already created (in case of crash or pause, don't recreate it)
 if [ ! -d "/var/lib/mysql/${MARIADB_DB}" ]
 then
-	#will initialize data directory and creates system table in mysql database;
-	#mariadb use it to manage privileges, roles and plugins
-	mysql_install_db --datadir /var/lib/mysql
 	#Create socket for mysql (to run sql)
 	service mysql start
 	#sleep to make sure socket has been created

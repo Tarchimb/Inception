@@ -11,14 +11,14 @@ volumes:
   mariadb-vol:
     name: mariadb-volume
     driver_opts:
-      device: /Users/tarchimb/42/Inception/data/mariadb
+      device: /home/tarchimb/data/mariadb
       type: volume
       o: bind
 
   wordpress-vol:
     name: wordpress-volume
     driver_opts:
-      device: /Users/tarchimb/42/Inception/data/wordpress
+      device: /home/tarchimb/data/wordpress
       type: volume
       o: bind
 

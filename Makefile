@@ -12,11 +12,9 @@
 
 DOCKER_NETWORK		=	$(shell docker network ls | grep Inception)
 DCR			=	docker compose -f srcs/docker-compose.yml
-# mariadb		= 	/home/tarchimb/data/mariadb
-# wordpress	= 	/home/tarchimb/data/wordpress
-mariadb 	= 	/Users/tarchimb/42/Inception/data/mariadb
-wordpress 	= 	/Users/tarchimb/42/Inception/data/wordpress
-volumes_dir	=	/Users/tarchimb/42/Inception/data
+mariadb		= 	/home/tarchimb/data/mariadb
+wordpress	= 	/home/tarchimb/data/wordpress
+volumes_dir	=	/home/tarchimb/data
 container	=	$(shell docker ps -qa)
 volume		=	$(shell docker volume ls -q)
 images		=	$(shell docker images -qa)

@@ -3,10 +3,10 @@
 #Check if the configuration script is here, if no, wordpress has already been installed
 if [ ! -f "/var/www/wordpress/wp-config.php" ]
 then
-	# while ! mysql -h mariadb -u root -p $MARIADB_ROOT_PWD -e "SELECT schema_name FROM information_schema.schemata WHERE schema_name='$MARIADB_DB'"; do
-  		# echo "Waiting for database to be created..."
-  		# sleep 5
-	# done
+	while ! mysql -h mariadb --user=${MARIADB_USER} --password=${MARIADB_ROOT_PWD} -e "SELECT schema_name FROM information_schema.schemata WHERE schema_name='$MARIADB_DB'"; do
+  		echo "Waiting for database to be created..."
+  		sleep 5
+	done
 	echo "Starting installation wordpress"
 	#Download Wordpress
 	wp core download --allow-root
