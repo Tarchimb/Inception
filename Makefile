@@ -34,7 +34,7 @@ reload: down all
 clean-volumes:
 	@docker volume rm -f mariadb-volume
 	@docker volume rm -f wordpress-volume
-	rm -rf $(volumes_dir)
+	sudo rm -rf $(volumes_dir)
 
 clean:
 	@docker rm -f mariadb 2> /dev/null
